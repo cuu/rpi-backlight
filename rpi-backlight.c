@@ -14,14 +14,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define POWER_FILE "/sys/class/backlight/rpi_backlight/bl_power"
+#define POWER_FILE "/sys/class/backlight/backlight@0/bl_power"
 #define POWER_ON 0
 #define POWER_OFF 1
 
-#define BRIGHTNESS_FILE "/sys/class/backlight/rpi_backlight/brightness"
-#define BRIGHTNESS_MAX 180
-#define BRIGHTNESS_MIN 30
-#define BRIGHTNESS_STEP 15
+#define BRIGHTNESS_FILE "/sys/class/backlight/backlight@0/brightness"
+#define BRIGHTNESS_MAX 9
+#define BRIGHTNESS_MIN 1
+#define BRIGHTNESS_STEP 1
 
 int usage(char *argv[]) {
     printf("usage: %s up | down | max | min | on | off\n\n"
