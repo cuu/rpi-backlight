@@ -49,10 +49,13 @@ int get_brightness() {
     return brightness_value;
 }
 
-void set_brightness(int brightness_value) {
+void set_brightness(int old_bright,int brightness_value) {
+
     if (brightness_value > BRIGHTNESS_MAX) brightness_value = BRIGHTNESS_MAX;
     if (brightness_value < BRIGHTNESS_MIN) brightness_value = BRIGHTNESS_MIN;
-    
+   
+
+    if ( old_bright == brightness_value ) return;
     FILE *brightness_file;
     
     brightness_file = fopen(BRIGHTNESS_FILE, "w");
@@ -104,7 +107,8 @@ int main(int argc, char *argv[]) {
     }
     
     // everything ok, get current values
-    int brightness_value = get_brightness();
+    int old_bright = get_brightness();
+    int brightness_value = old_bright;
     int power_value = get_power();
     
     // process arguments
@@ -131,7 +135,7 @@ int main(int argc, char *argv[]) {
     }
     
     // save new values
-    set_brightness(brightness_value);
+    set_brightness(old_bright,brightness_value);
     set_power(power_value);
     
     return EXIT_SUCCESS;
